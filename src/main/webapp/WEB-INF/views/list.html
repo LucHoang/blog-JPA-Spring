@@ -86,6 +86,7 @@
 <!--            Start Bootstrap-->
           </a>
 <!--          on September 24, 2019-->
+          on <span th:text="${blog.datePost}"></span>
         </p>
         <a th:href="@{/delete-blog/{id}(id=${blog.getId()})}">Delete</a>
       </div>

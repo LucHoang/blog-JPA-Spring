@@ -2,6 +2,8 @@ package com.hsl.model;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Entity
 @Table
@@ -13,12 +15,12 @@ public class Blog {
     private String descriptionShort;
     private String description;
     private String author;
-    private Date datePost;
+    private LocalDateTime datePost;
 
     public Blog() {
     }
 
-    public Blog(Long id, String tittle, String descriptionShort, String description, String author, Date datePost) {
+    public Blog(Long id, String tittle, String descriptionShort, String description, String author, LocalDateTime datePost) {
         this.id = id;
         this.tittle = tittle;
         this.descriptionShort = descriptionShort;
@@ -67,11 +69,11 @@ public class Blog {
         this.author = author;
     }
 
-    public Date getDatePost() {
+    public LocalDateTime getDatePost() {
         return datePost;
     }
 
-    public void setDatePost(Date datePost) {
+    public void setDatePost(LocalDateTime datePost) {
         this.datePost = datePost;
     }
 }

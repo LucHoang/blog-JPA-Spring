@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -27,6 +29,8 @@ public class BlogController {
 
     @PostMapping("/create-blog")
     public ModelAndView saveBlog(@ModelAttribute("blog") Blog blog) {
+        LocalDateTime timePost = LocalDateTime.now();
+        blog.setDatePost(timePost);
         blogService.save(blog);
         ModelAndView modelAndView = new ModelAndView("/create");
         modelAndView.addObject("blog", new Blog());
