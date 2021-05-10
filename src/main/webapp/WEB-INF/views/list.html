@@ -1,7 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -47,6 +50,12 @@
         <li class="nav-item">
           <a class="nav-link" href="contact.html">Contact</a>
         </li>
+          <li class="nav-item" sec:authorize="isAnonymous()">
+              <a class="nav-link" th:href="@{/admin}">Sign in</a>
+          </li>
+          <li class="nav-item" sec:authorize="isAuthenticated()">
+              <a class="nav-link" th:href="@{/logout}">Logout</a>
+          </li>
       </ul>
     </div>
   </div>
@@ -88,7 +97,9 @@
 <!--          on September 24, 2019-->
           on <span th:text="${blog.datePost}"></span>
         </p>
+          <div sec:authorize="hasRole('ADMIN')">
         <a th:href="@{/delete-blog/{id}(id=${blog.getId()})}">Delete</a>
+          </div>
       </div>
       <hr>
       </th:block>
@@ -133,7 +144,7 @@
 <!--      </div>-->
 <!--      <hr>-->
       <!-- Pager -->
-      <div class="clearfix">
+      <div class="clearfix" sec:authorize="isAuthenticated()">
         <a class="btn btn-primary float-right" th:href="@{/create-blog}">Create Post &rarr;</a>
       </div>
     </div>

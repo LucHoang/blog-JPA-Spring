@@ -3,6 +3,8 @@ package com.hsl.controller;
 import com.hsl.model.Blog;
 import com.hsl.service.IBlogService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -94,6 +96,21 @@ public class BlogController {
     @PostMapping("/delete-blog")
     public String deleteCustomer(@ModelAttribute("blog") Blog blog) {
         blogService.remove(blog.getId());
-        return "redirect:blog";
+        return "redirect:/blog";
     }
+
+    @GetMapping("/admin")
+    public ModelAndView admin() {
+        // Get authenticated user name from SecurityContext
+        SecurityContext context = SecurityContextHolder.getContext();
+        System.out.println(context.getAuthentication().getName());
+        return new ModelAndView("redirect:/blog");
+    }
+
+//    @GetMapping("/logout")
+//    public ModelAndView logout() {
+////        SecurityContext context = SecurityContextHolder.getContext();
+////        System.out.println(context.getAuthentication().getName());
+//        return new ModelAndView("redirect:/blog");
+//    }
 }
